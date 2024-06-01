@@ -14,8 +14,10 @@ import (
  func NewHandlers(Userrepo postgres.UserRepo)Handlers{
 	return Handlers{ UserRepo: Userrepo}
  }
+
+
 func (h *Handlers)CreateUser(UserRepo postgres.UserRepo){
-	var user = modles.NewUsers()
+	var user  modles.Users
 	fmt.Println("enter user name ")
 	fmt.Scanln(&user.User_name)
 	fmt.Println("enter gmail ")
@@ -27,5 +29,73 @@ func (h *Handlers)CreateUser(UserRepo postgres.UserRepo){
 	}
 
 	fmt.Println("created")
+
+}
+
+func (h *Handlers)UpdateUser(UserRepo postgres.UserRepo){
+
+	id:=0
+	user_name:=""
+
+	fmt.Println("enter Updating user's name ")
+	fmt.Scanln(&user_name)
+
+	fmt.Println("enter Updating user's id ")
+	fmt.Scanln(&id)
+
+	err:=UserRepo.UpdateUsersName(context.Background(),user_name,0)
+	if err != nil{
+		log.Println(err)
+		return
+	}
+
+}
+
+
+func (h * Handlers)DeleteUser( UserRepo postgres.UserRepo){
+	id:=0
+
+	fmt.Println("enter deleting user's id ")
+	fmt.Scanln(&id)
+
+	err:=UserRepo.DeleteUser(context.Background(),id)
+
+	if err != nil{
+		log.Println(err)
+		return
+	}
+
+}
+
+
+
+
+func (h *Handlers)GetUsers(){
+	
+	page:=0
+	fmt.Println("enter page number")
+	fmt.Scanln(&page)
+	rows,err:=h.UserRepo.GetUsers(context.Background(),3,page)
+	if err != nil{
+		log.Println(err)
+		return
+	}
+
+	fmt.Println(rows)
+}
+
+
+
+func (h *Handlers)GetUserByID(){
+	id:=0
+	fmt.Println("enter user_id")
+	fmt.Scanln(&id)
+	query,err:=h.UserRepo.GetUserByID(context.Background(),id)
+
+	if err != nil{
+		log.Println(err)
+		return
+	}
+	fmt.Println(query)
 
 }
