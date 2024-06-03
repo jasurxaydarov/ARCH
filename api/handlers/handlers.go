@@ -16,13 +16,13 @@ import (
  }
 
 
-func (h *Handlers)CreateUser(UserRepo postgres.UserRepo){
+func (h *Handlers)CreateUser(){
 	var user  modles.Users
 	fmt.Println("enter user name ")
 	fmt.Scanln(&user.User_name)
 	fmt.Println("enter gmail ")
 	fmt.Scanln(&user.Gmail)
-	err:=UserRepo.CreateUser(context.Background(),user)
+	err:=h.UserRepo.CreateUser(context.Background(),user)
 	if err!=nil{
 		log.Println("error on create user",err)
 		return 
@@ -32,7 +32,7 @@ func (h *Handlers)CreateUser(UserRepo postgres.UserRepo){
 
 }
 
-func (h *Handlers)UpdateUser(UserRepo postgres.UserRepo){
+func (h *Handlers)UpdateUser(){
 
 	id:=0
 	user_name:=""
@@ -43,7 +43,7 @@ func (h *Handlers)UpdateUser(UserRepo postgres.UserRepo){
 	fmt.Println("enter Updating user's id ")
 	fmt.Scanln(&id)
 
-	err:=UserRepo.UpdateUsersName(context.Background(),user_name,0)
+	err:=h.UserRepo.UpdateUsersName(context.Background(),user_name,0)
 	if err != nil{
 		log.Println(err)
 		return
@@ -52,13 +52,13 @@ func (h *Handlers)UpdateUser(UserRepo postgres.UserRepo){
 }
 
 
-func (h * Handlers)DeleteUser( UserRepo postgres.UserRepo){
+func (h * Handlers)DeleteUser(){
 	id:=0
 
 	fmt.Println("enter deleting user's id ")
 	fmt.Scanln(&id)
 
-	err:=UserRepo.DeleteUser(context.Background(),id)
+	err:=h.UserRepo.DeleteUser(context.Background(),id)
 
 	if err != nil{
 		log.Println(err)

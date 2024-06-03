@@ -30,9 +30,9 @@ func Api(UserRepo postgres.UserRepo){
 		switch oprt{
 		case 1: h.GetUserByID()	
 		case 2: h.GetUsers()	
-		case 3: h.CreateUser(UserRepo)
-		case 4: h.UpdateUser(UserRepo)
-		case 5: h.DeleteUser(UserRepo)
+		case 3: h.CreateUser()
+		case 4: h.UpdateUser()
+		case 5: h.DeleteUser()
 		case 0:return
 		}
 	}
