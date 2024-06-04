@@ -43,7 +43,7 @@ func (h *Handlers)UpdateUser(){
 	fmt.Println("enter Updating user's id ")
 	fmt.Scanln(&id)
 
-	err:=h.UserRepo.UpdateUsersName(context.Background(),user_name,0)
+	err:=h.UserRepo.UpdateUserName(context.Background(),user_name,0)
 	if err != nil{
 		log.Println(err)
 		return

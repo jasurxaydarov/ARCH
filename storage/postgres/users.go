@@ -104,27 +104,6 @@ func (u UserRepo)UpdateUserName(ctx context.Context,name string,user_id int)erro
 	return nil
 }
 
-func (u UserRepo)UpdateUsersName(ctx context.Context,name string,user_id int)error{
-	query:=
-		`UPDATE
-			 users 
-		SET 
-			user_name = $1 
-		WHERE
-			 user_id = $2;`
-
-	_, err := u.db.Exec(ctx,query,name,user_id )
-
-	if err!= nil{
-
-		log.Println("error on Update user name ", err)
-		return err
-	}
-
-	fmt.Println("succesfully updated")
-
-	return nil
-}
 
 func (u UserRepo) DeleteUser(ctx context.Context,user_id int)error{
 
